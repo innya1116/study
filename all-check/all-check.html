@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>all check - Form</title>
+</head>
+
+<body>
+    <!-- form > 전체동의
+    -->
+    <div class="checkbox-container">
+        <span class="checkbox checkbox--all">
+            <input type="checkbox" class="checkbox__input" id="checkbox-type1">
+            <label for="checkbox-type1">전체동의</label>
+        </span>
+        <div class="checkbox-list">
+            <span class="checkbox">
+                <input type="checkbox" class="checkbox__input" id="checkRequired1" required>
+                <label for="checkRequired1">checkRequired1</label>
+            </span>
+            <span class="checkbox">
+                <input type="checkbox" class="checkbox__input" id="checkRequired2" required>
+                <label for="checkRequired2">checkRequired2</label>
+            </span>
+            <span class="checkbox">
+                <input type="checkbox" class="checkbox__input" id="checkRequired3" required>
+                <label for="checkRequired3">checkRequired1</label>
+            </span>
+            <span class="checkbox">
+                <input type="checkbox" class="checkbox__input" id="checkRequired4" required>
+                <label for="checkRequired4">checkRequired2</label>
+            </span>
+            <span class="checkbox">
+                <input type="checkbox" class="checkbox__input" id="checkOptional1">
+                <label for="checkOptional1">checkOptional</label>
+            </span>
+            <span class="checkbox">
+                <input type="checkbox" class="checkbox__input" id="checkOptional2">
+                <label for="checkOptional2">checkOptional</label>
+            </span>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            let chkAll = document.querySelector('.checkbox--all .checkbox__input');
+            let chkList = document.querySelectorAll('.checkbox-list .checkbox__input');
+            // 전체 동의 선택/해제
+            chkAll.addEventListener('change', function() {
+                for (let i=0; i < chkList.length; i++) {
+                    chkList[i].checked = this.checked;
+                }
+            });
+            let cnt = 0;
+            chkList.forEach((item) => item.addEventListener('change', function() {
+                if(this.checked) {
+                    cnt = cnt + 1;
+
+                    if(cnt == chkList.length) {
+                        chkAll.checked = true;
+                    } else {
+                        chkAll.checked = false;
+                    }
+                } else {
+                    cnt = cnt - 1;
+
+                    if(cnt == chkList.length) {
+                        chkAll.checked = true;
+                    } else {
+                        chkAll.checked = false;
+                    }
+                }
+            }));
+        }
+    </script>
+</body>
+</html>
