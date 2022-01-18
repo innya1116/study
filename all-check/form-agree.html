@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>Agree - Form</title>
+</head>
+
+<body>
+    <!-- form > 전체동의
+        form > 부분동의(필수, 선택)
+        form > submit button
+        모두 연동되는 케이스
+    -->
+    <form action="/" method="post" id="agree-form">
+        <span class="checkbox checkbox--all">
+            <input type="checkbox" class="checkbox__input" id="checkbox-type1">
+            <label for="checkbox-type1">전체동의</label>
+        </span>
+        <div class="checkbox-list">
+            <span class="checkbox">
+                <input type="checkbox" class="checkbox__input" id="checkRequired1" required>
+                <label for="checkRequired1">1동의</label>
+            </span>
+            <span class="checkbox">
+                <input type="checkbox" class="checkbox__input" id="checkRequired2" required>
+                <label for="checkRequired2">2동의</label>
+            </span>
+            <span class="checkbox">
+                <input type="checkbox" class="checkbox__input" id="checkOptional">
+                <label for="checkOptional">선택동의</label>
+            </span>
+        </div>
+        <button class="button button--submit" disabled>확인</button>
+    </form>
+    <script>
+        window.onload = function(){
+            const agreeForm = document.querySelector('#agree-form');
+            const checkAll = document.querySelector('.checkbox--all .checkbox__input')
+            const checkBoxes = document.querySelectorAll('.checkbox-list .checkbox__input');
+            const submitButton = document.querySelector('.button--submit');
+
+            const agreements = {
+                checkRequired1: false,
+                checkRequired2: false,
+                checkOptional: false
+            }
+
+            agreeForm.addEventListener('submit', (e) => e.preventDefault());  // 새로고침 안되도록
+
+            checkBoxes.forEach((item) => item.addEventListener('input', toggleCheckbox));
+            function toggleCheckbox(e) {
+                const {checked, id} = e.target;
+                agreements[id] = checked;
+                this.parentNode.classList.toggle('active');
+                checkAllStatus();
+                toggleSubmitButton();
+            }
+
+            function checkAllStatus() {
+                const {checkRequired1, checkRequired2, checkOptional} = agreements;
+                if (checkRequired1 && checkRequired2 && checkOptional) {
+                    checkAll.checked = true;
+                } else {
+                    checkAll.checked = false;
+                }
+            }
+
+            function toggleSubmitButton() {
+                const {checkRequired1, checkRequired2} = agreements;
+                if(checkRequired1 && checkRequired2) {
+                    submitButton.disabled = false;
+                } else {
+                    submitButton.disabled = true;
+                }
+            }
+
+            checkAll.addEventListener('click', (e) => {
+                const { checked } = e.target;
+
+                if (checked) {
+                    checkBoxes.forEach((item) => {
+                        item.checked = true;
+                        agreements[item.id] = true;
+                        item.parentNode.classList.add('active');
+                    });
+                } else {
+                    checkBoxes.forEach((item) => {
+                        item.checked = false;
+                        agreements[item.id] = false;
+                        item.parentNode.classList.remove('active');
+                    });
+                }
+
+                toggleSubmitButton();
+            })
+        }
+    </script>
+</body>
+</html>
