@@ -1,0 +1,18 @@
+// Country excluding html language 'en', Font setting
+.lang(@lang) {
+  html[lang^='@{lang}'] {
+    &,
+    body {
+      font-family: sans-serif;
+    }
+  }
+}
+
+.lang(@lang; @font-family) {
+  html[lang^='@{lang}'] {
+    &,
+    body {
+      font-family: @font-family, sans-serif;
+    }
+  }
+}

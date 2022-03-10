@@ -1,0 +1,28 @@
+// variable, mixin
+@import '_global';
+@import url('normalize.css');
+// All Country
+@import '_font';
+// Style Reset
+@import '_reset';
+// Country excluding html language 'en', Font setting
+@import '_font-other';
+
+.bg-black {
+  background: #000;
+
+  * {
+    color: #fff;
+  }
+}
+
+.bg-white {
+  background: #fff;
+
+  * {
+    color: #000;
+  }
+}
+
+// Definition to layout style
+@import 'layout';
