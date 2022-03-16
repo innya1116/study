@@ -1,6 +1,0 @@
-1. 삼성의 개인정보 처리방침(https://privacy.samsung.com/policy/samsung)
-   해당 페이지의 내용은 에디터로 입력되는지 마크업으로 만들어야 하는지 확인 필요.
-2. 다국어 적용을 위해서 각 국가에서 적용하는 폰트 수급 필요
-   (영문을 기준으로 sharp sans로 적용하는 폰트를 국가별 어떻게 적용할지 확인 필요)
-3. rtl 국가는 body에 dir="rtl" 속성 추가 필요
-4. P6와 동일하게 각국가별 폰트 적용 시 font-family naming은 samsungOne 으로 통일
